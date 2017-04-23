@@ -1,5 +1,7 @@
-syntax on
+on
 set nocompatible              " be iMproved, required
+
+set background=dark
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -13,6 +15,7 @@ filetype plugin indent on
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+Plugin 'Shougo/vimproc.vim'
 
 "ultisnips + default snippets
 Plugin 'SirVer/ultisnips'
@@ -35,11 +38,11 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'ervandew/supertab'
-Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'tComment'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'wakatime/vim-wakatime'
+Plugin 'mustache/vim-mustache-handlebars'
 
 " Git
 Plugin 'tpope/vim-fugitive'
@@ -72,24 +75,26 @@ Plugin 'Syntastic'
 " Autosave
 Plugin 'vim-auto-save'
 
-" Dart
-Plugin 'dart-lang/dart-vim-plugin'
+"Go
+Plugin 'fatih/vim-go'
 
 " UI
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
-Plugin 'ap/vim-css-color'
 Plugin 'AnsiEsc.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'roman/golden-ratio'
+Plugin 'elmcast/elm-vim'
 
 "--------------------Themes----------------------"
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'ap/vim-css-color'
 Plugin 'tomasr/molokai'
-Plugin 'jonathanfilip/vim-lucius'
+Plugin 'exitface/synthwave.vim'
+Plugin 'tyrannicaltoucan/vim-deep-space'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -104,13 +109,19 @@ augroup END
 " Save on focus lost
 au FocusLost * silent! wa
 
-
 "-----------Options----------------------------"
 filetype on
 filetype plugin indent on    " required
 
 " Setting up the theme
-colorscheme jellybeans
+" colorscheme molokai
+" colorscheme jellybeans
+colorscheme synthwave
+
+
+" colorscheme deep-space
+" let g:deepspace_italics=1
+
 
 " No wrapping please
 set nowrap
@@ -178,18 +189,32 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 " Syntastic
 let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:elm_syntastic_show_warnings = 1
+
+" Haskell
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
 "airline
 let g:airline_powerline_fonts = 1
 
+let g:UltiSnipsExpandTrigger="<tab><tab>"
 " Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 " Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#fnamemod = ':t'
 
 "vim-auto-save
 let g:auto_save = 1  " enable AutoSave
+let g:elm_format_autosave = 1
 let g:auto_save_in_insert_mode = 0
 let g:auto_save_silent = 1  " do not display the auto-save notification
 
